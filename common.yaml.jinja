@@ -18,6 +18,41 @@ services:
       PGUSER: &dbuser "{{ postgres_username }}"
       PROXY_MODE: "{% if odoo_proxy %}true{% else %}false{% endif %}"
       LIST_DB: "{{ odoo_listdb | tojson }}"
+      SUPER_ADMIN_PASSWORD: $SUPER_ADMIN_PASSWORD
+      LIMIT_MEMORY_SOFT: $LIMIT_MEMORY_SOFT
+      LIMIT_MEMORY_HARD: $LIMIT_MEMORY_HARD
+      LIMIT_REQUEST: $LIMIT_REQUEST
+      LIMIT_TIME_CPU: $LIMIT_TIME_CPU
+      LIMIT_TIME_REAL: $LIMIT_TIME_REAL
+      LIMIT_TIME_REAL_CRON: $LIMIT_TIME_REAL_CRON
+      WORKERS: $WORKERS
+
+      # Cloud Plataform Variables
+      RUNNING_ENV: "${ENV-dev}"
+      AWS_HOST: $S3_HOST
+      AWS_ACCESS_KEY_ID: $S3_ACCESS_KEY_ID
+      AWS_SECRET_ACCESS_KEY: $S3_SECRET_ACCESS_KEY
+      AWS_BUCKETNAME: $S3_BUCKETNAME
+      ODOO_SESSION_REDIS: $REDIS_ON
+      ODOO_SESSION_REDIS_HOST: $REDIS_HOST
+      ODOO_SESSION_REDIS_PREFIX: $REDIS_PREFIX
+      ODOO_SESSION_REDIS_PASSWORD: $REDIS_PASS
+
+      # GELF Variables
+      GELF_ENABLED: ${GELF_ENABLED-false}
+      GELF_HOST: ${GELF_HOST-false}
+      GELF_PORT: ${GELF_PORT-false}
+      GELF_LOCALNAME: ${GELF_LOCALNAME-false}
+
+      # Marabunta Variables
+      MARABUNTA_MODE: "${ENV-dev}"
+      MARABUNTA_ALLOW_SERIE: $MARABUNTA_ALLOW_SERIE
+
+      # Queue Job Variables
+      ODOO_QUEUE_JOB_CHANNELS: "${ODOO_QUEUE_JOB_CHANNELS:-0}"
+      ODOO_QUEUE_JOB_PORT: "${ODOO_QUEUE_JOB_PORT:-8069}"
+
+
     {%- if smtp_canonical_default %}
     hostname: "{{ smtp_canonical_default }}"
     {%- endif %}
